@@ -1,50 +1,38 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+  <div>
+    <div class="container">
+      <div class="row">
+        <div>
+          <div v-if="alert.message" :class="`alert ${alert.type}`">
+            {{ alert.message }}
+          </div>
+          <router-view></router-view>
+        </div>
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view />
-    </v-main>
-  </v-app>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-  name: "App",
+import { mapState, mapActions } from "vuex";
 
-  data: () => ({
-    //
-  }),
+export default {
+  name: "app",
+  computed: {
+    ...mapState({
+      alert: (state) => state.alert,
+    }),
+  },
+  methods: {
+    ...mapActions({
+      clearAlert: "alert/clear",
+    }),
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      this.clearAlert();
+    },
+  },
 };
 </script>

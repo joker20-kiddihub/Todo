@@ -1,14 +1,23 @@
 import Vue from "vue";
+import VeeValidate from "vee-validate";
+import Vuex from "vuex";
+import { store } from "./_store";
+import { router } from "./_helpers";
 import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+
 import vuetify from "./plugins/vuetify";
 
+Vue.use(VeeValidate);
+Vue.use(Vuex);
 Vue.config.productionTip = false;
 
+import { configureFakeBackend } from "./_helpers";
+configureFakeBackend();
+
 new Vue({
+  el: "#app",
+  vuetify,
   router,
   store,
-  vuetify,
   render: (h) => h(App),
-}).$mount("#app");
+});
