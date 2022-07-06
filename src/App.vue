@@ -1,16 +1,10 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="row">
-        <div>
-          <div v-if="alert.message" :class="`alert ${alert.type}`">
-            {{ alert.message }}
-          </div>
-          <router-view></router-view>
-        </div>
-      </div>
+  <v-app>
+    <div v-if="alert.message" :class="`alert ${alert.type}`">
+      {{ alert.message }}
     </div>
-  </div>
+    <router-view></router-view>
+  </v-app>
 </template>
 
 <script>

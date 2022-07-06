@@ -1,6 +1,22 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib/framework";
+import colors from "../Configs/colors";
+
+const opts = {
+  theme: {
+    themes: {
+      light: {
+        ...colors,
+      },
+
+      dark: {},
+    },
+  },
+  icons: {
+    iconfont: "mdiSvg", // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+  },
+};
 
 Vue.use(Vuetify);
 
-export default new Vuetify({});
+export default new Vuetify(opts);
