@@ -42,13 +42,12 @@
             <div class="form-group">
               <button
                 class="mr-4 mt-4"
-                @click="submit"
                 color="green"
                 block
                 :disabled="status.loggingIn"
               >
                 <a href="http://localhost:8080/login"></a>
-                submit
+                Submit
               </button>
               <img
                 v-show="status.loggingIn"
