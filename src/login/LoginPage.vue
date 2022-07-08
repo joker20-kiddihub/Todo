@@ -83,6 +83,7 @@ export default {
   computed: {
     ...mapState("account", ["status"]),
   },
+
   created() {
     this.logout();
   },

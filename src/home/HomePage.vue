@@ -1,31 +1,33 @@
 <template>
   <v-container class="fill-height fluid">
     <v-card width="100%" class="d-flex flex-column align-center elevation-0">
-      <h1>Hi {{ account.user.username }}!</h1>
-      <h1 class="text-md-center mb-12 font-weight-light">TO DO LIST</h1>
+      <h1 class="text-md-center mb-2 font-weight-light">TO DO LIST</h1>
+      <h3 class="mb-4">Hi {{ account.user.username }}!</h3>
       <v-card
         class="justify-center ma-0 elevation-20 d-flex"
         height="450"
-        color="main"
+        color="#D5D778"
         width="80%"
       >
         <v-card width="60%" class="ma-0 elevation-0" color="transparent">
           <v-item-group class="mt-6">
             <v-row class="mt-8 align-start">
               <v-text-field
-                class="form-control"
-                v-model.trim="newTodo"
-                @keyup.enter="Add"
+                outlined
+                clearable
+                type="text"
+                solo
                 placeholder="Click Enter to add..."
+                @keyup.enter="Add"
+                v-model.trim="newTodo"
               >
               </v-text-field>
               <v-btn
-                height="50"
+                height="56"
                 x-large
-                color="green"
+                color="blue"
                 class="white--text"
                 @click="Add"
-                style="color: green"
               >
                 ADD TASK
               </v-btn>
@@ -33,13 +35,13 @@
           </v-item-group>
           <div class="m-5 text-center">
             <b> You have {{ allTasks }} task </b>
-            <span class="badge badge-warning">
+            <span style="background: orange" class="rounded-5">
               remaining task : {{ notDone }}
             </span>
-            <span class="badge badge-success"> done task : {{ Done }} </span>
+            <span style="background: green">done task : {{ Done }}</span>
           </div>
-          <v-list color="main">
-            <div>
+          <v-list color="transparent">
+            <div class="d-flex align-center">
               <table class="mt-3 listTodo">
                 <p v-if="toDos.length <= 0">Empty list</p>
                 <tr
@@ -48,7 +50,7 @@
                   :class="{ completed: item.completed }"
                 >
                   <td>
-                    <input
+                    <v-checkbox
                       class="mark"
                       type="checkbox"
                       v-model="item.completed"
@@ -84,7 +86,7 @@
           </v-list>
         </v-card>
       </v-card>
-      <p class="text-md-center mt-12 font-weight-bold">
+      <p class="text-md-center mt-4 font-weight-bold">
         Click in task to edit, Enter to submit
       </p>
       <router-link to="/login">Logout</router-link>
