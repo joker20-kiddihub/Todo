@@ -1,6 +1,7 @@
 <template>
   <v-container class="fill-height fluid">
     <v-card width="100%" class="d-flex flex-column align-center elevation-0">
+      <h1>Hi {{ account.user.username }}!</h1>
       <h1 class="text-md-center mb-12 font-weight-light">TO DO LIST</h1>
       <v-card
         class="justify-center ma-0 elevation-10 d-flex"
@@ -12,66 +13,95 @@
           <v-item-group class="mt-6">
             <v-row class="mt-8 align-start">
               <v-text-field
-                outlined
-                clearable
-                placeholder="Todo..."
-                type="text"
-                solo
+                class="form-control"
+                v-model.trim="newTodo"
+                @keyup.enter="Add"
+                placeholder="Click Enter to add..."
               >
               </v-text-field>
-              <v-btn height="56" x-large color="green" class="white--text">
+              <v-btn
+                height="50"
+                x-large
+                color="green"
+                class="white--text"
+                @click="Add"
+                style="color: green"
+              >
                 ADD TASK
               </v-btn>
             </v-row>
           </v-item-group>
+          <div class="m-5 text-center">
+            <b> You have {{ allTasks }} task </b>
+            <span class="badge badge-warning">
+              remaining task : {{ notDone }}
+            </span>
+            <span class="badge badge-success"> done task : {{ Done }} </span>
+          </div>
           <v-list color="main">
-            <v-list-item background-color="transparent">
-              <v-checkbox class="mt-0 pt-0"></v-checkbox>
-
-              <v-list-item-content class="pa-0">
-                <v-list-item-title>Notifications</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item background-color="transparent">
-              <v-checkbox class="mt-0 pt-0"></v-checkbox>
-
-              <v-list-item-content>
-                <v-list-item-title>Notifications</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+            <div>
+              <table class="mt-3 listTodo">
+                <p v-if="toDos.length <= 0">Empty list</p>
+                <tr
+                  v-for="item in toDos"
+                  :key="item.id"
+                  :class="{ completed: item.completed }"
+                >
+                  <td>
+                    <input
+                      class="mark"
+                      type="checkbox"
+                      v-model="item.completed"
+                    />
+                    <span class="checkmark"> </span>
+                  </td>
+                  <td>
+                    <div class="ok">
+                      <label @click="edit(item)" style="margin-top: 10px">
+                        {{ item.title }}
+                      </label>
+                      <input
+                        v-if="editting == item && item.completed != true"
+                        v-model="item.title"
+                        :class="{}"
+                        @keyup.escape="doneEdit"
+                        @keyup.enter="doneEdit"
+                      />
+                    </div>
+                  </td>
+                  <td width="20%">
+                    <a
+                      @click="Delete(item)"
+                      title="Xóa"
+                      class="delete badge badge-danger"
+                    >
+                      x
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </v-list>
-          <p class="text-md-center mt-12 font-weight-bold">
-            You have 3 task
-            <span color="red">remaining task: 2</span>
-            <span> done task: 1 </span>
-          </p>
         </v-card>
       </v-card>
       <p class="text-md-center mt-12 font-weight-bold">
         Click in task to edit, Enter to submit
       </p>
+      <router-link to="/login">Logout</router-link>
     </v-card>
   </v-container>
 </template>
 
 <script>
 const LOCAL_STORAGE_KEY = "todo";
-import Datepicker from "vuejs-datepicker";
-import { vi } from "vuejs-datepicker/dist/locale";
 import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       toDos: this.$store.state.toDos,
-      firstTodo: this.$store.state.account.user.id,
       newTodo: this.$store.state.newToDo,
       editting: this.$store.state.editting,
-      vi: vi,
     };
-  },
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    Datepicker,
   },
   computed: {
     ...mapState({
@@ -110,13 +140,6 @@ export default {
     },
     doneEdit() {
       this.editting = null;
-    },
-  },
-  filters: {
-    capitalize: function (value) {
-      if (!value) return "";
-      value = value.toString();
-      return value.charAt(0).toUpperCase() + value.slice(1);
     },
   },
   watch: {
