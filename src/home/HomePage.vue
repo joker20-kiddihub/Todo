@@ -1,20 +1,7 @@
 <template>
-  <div class="col-sm-12 offset-sm-8">
+  <div>
     <h1>Hi {{ account.user.username }}!</h1>
     <i>You're logged in</i>
-    <!-- <h3>Users :</h3>
-    <em v-if="users.loading">Loading users...</em>
-    <span v-if="users.error" class="text-danger">ERROR: {{ users.error }}</span>
-    <ul v-if="users.items">
-      <li v-for="user in users.items" :key="user.id">
-        {{ user.username }}
-        <span v-if="user.deleting"><em> - Deleting...</em></span>
-        <span v-else-if="user.deleteError" class="text-danger">
-          - ERROR: {{ user.deleteError }}</span>
-        <span v-else>
-          - <a @click="deleteUser(user.id)" class="text-danger">Delete</a></span>
-      </li>
-    </ul> -->
     <p>
       <router-link to="/login">Logout</router-link>
     </p>
@@ -24,7 +11,7 @@
       {{ count }}
       <div class="box p-4" style="backgroundcolor: #d5d778">
         <div class="form-group ml-5 mr-5 row">
-          <div class="col-10">
+          <div class="col-4">
             <input
               class="form-control"
               autofocus
@@ -33,8 +20,8 @@
               placeholder="Click Enter to add..."
             />
           </div>
-          <div class="col-2">
-            <button @click="Add" class="btn btn-primary">Add task</button>
+          <div>
+            <button @click="Add">Add task</button>
           </div>
         </div>
         <div class="m-5 text-left">
@@ -58,7 +45,6 @@
               </td>
               <td>
                 <div class="ok">
-                  <label>{{ firstTodo }}</label>
                   <label @click="edit(item)" style="margin-top: 10px">
                     {{ item.title | capitalize }}
                   </label>
@@ -179,7 +165,6 @@ export default {
 </script>
 <style scoped>
 .completed label {
-  color: #ffffff;
   text-decoration: line-through;
 }
 

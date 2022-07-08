@@ -29,8 +29,6 @@ export function configureFakeBackend() {
             let responseJson = {
               id: user.id,
               username: user.username,
-              firstName: user.firstName,
-              lastName: user.lastName,
               token: "fake-jwt-token",
             };
             resolve({
@@ -39,7 +37,6 @@ export function configureFakeBackend() {
             });
           } else {
             reject("Username is incorrect");
-            alert("Username is incorrect");
           }
 
           return;
