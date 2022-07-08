@@ -37,7 +37,6 @@
                   'is-invalid': submitted && !username,
                 }"
               ></v-text-field>
-
               <div v-show="submitted && !username" class="invalid-feedback">
                 Username is required
               </div>

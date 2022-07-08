@@ -1,12 +1,13 @@
+import { account } from "./account.module";
+
 export default {
-  addTask(state, newToDo, newId, user_id) {
+  addTask(state, newToDo, newId) {
     if (newToDo.length) {
       state.toDos.push({
         id: newId,
         title: newToDo,
         completed: false,
-        description: null,
-        user_id: user_id,
+        user_id: account.state.user.id,
         completed_at: null,
         create_at: Date().toString(),
       });
