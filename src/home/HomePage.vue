@@ -3,7 +3,7 @@
     <v-card width="100%" class="d-flex flex-column align-center elevation-0">
       <h1 class="text-md-center mb-12 font-weight-light">TO DO LIST</h1>
       <v-card
-        class="justify-center ma-0 elevation-10 d-flex"
+        class="justify-center ma-0 elevation-20 d-flex"
         height="450"
         color="main"
         width="80%"
@@ -19,31 +19,34 @@
                 solo
               >
               </v-text-field>
-              <v-btn height="56" x-large color="green" class="white--text">
+              <v-btn height="56" x-large color="blue" class="white--text">
                 ADD TASK
               </v-btn>
             </v-row>
           </v-item-group>
           <v-list color="main">
-            <v-list-item background-color="transparent">
-              <v-checkbox class="mt-0 pt-0"></v-checkbox>
+            <div class="d-flex align-center" style="height: 30px">
+              <v-checkbox class="pt-0"></v-checkbox>
 
-              <v-list-item-content class="pa-0">
-                <v-list-item-title>Notifications</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item background-color="transparent">
-              <v-checkbox class="mt-0 pt-0"></v-checkbox>
+              <v-list-item->Notifications</v-list-item->
+            </div>
+            <div class="d-flex align-center" style="height: 30px">
+              <v-checkbox class="pt-0"></v-checkbox>
 
-              <v-list-item-content>
-                <v-list-item-title>Notifications</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+              <v-list-item->Notifications</v-list-item->
+            </div>
+            <div class="d-flex align-center" style="height: 30px">
+              <v-checkbox class="pt-0"></v-checkbox>
+
+              <v-list-item->Notifications</v-list-item->
+            </div>
           </v-list>
-          <p class="text-md-center mt-12 font-weight-bold">
+          <p class="text-md-center font-weight-bold mt-auto" bottom>
             You have 3 task
-            <span color="red">remaining task: 2</span>
-            <span> done task: 1 </span>
+            <span style="background: yellow" class="rounded-5"
+              >remaining task: 2
+            </span>
+            <span style="background: blue"> done task: 1 </span>
           </p>
         </v-card>
       </v-card>
@@ -129,46 +132,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.completed label {
-  text-decoration: line-through;
-}
-
-label {
-  cursor: pointer;
-}
-
-table {
-  width: 70%;
-}
-
-table,
-td {
-  border: 1px black;
-  text-align: left;
-}
-
-table td .delete {
-  display: none;
-}
-
-table tr:hover .delete {
-  display: block;
-}
-
-.mark {
-  width: 50px;
-  height: auto;
-}
-
-.ok {
-  position: relative;
-}
-
-.ok input {
-  position: absolute;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-}
-</style>
