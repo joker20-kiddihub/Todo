@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <div v-if="alert.message" :class="`alert ${alert.type}`">
-      {{ alert.message }}
+      <v-alert type="error">
+        {{ alert.message }}
+      </v-alert>
     </div>
     <router-view></router-view>
   </v-app>
