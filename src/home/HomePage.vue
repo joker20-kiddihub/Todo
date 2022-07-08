@@ -152,3 +152,46 @@ export default {
   },
 };
 </script>
+<style scoped>
+.completed label {
+  text-decoration: line-through;
+}
+
+label {
+  cursor: pointer;
+}
+
+table {
+  width: 70%;
+}
+
+table,
+td {
+  border: 1px black;
+  text-align: left;
+}
+
+table td .delete {
+  display: none;
+}
+
+table tr:hover .delete {
+  display: block;
+}
+
+.mark {
+  width: 50px;
+  height: auto;
+}
+
+.ok {
+  position: relative;
+}
+
+.ok input {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+}
+</style>
