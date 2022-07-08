@@ -42,7 +42,6 @@
             <div class="form-group">
               <button
                 class="mr-4 mt-4"
-                @click="submit"
                 color="green"
                 block
                 :disabled="status.loggingIn"

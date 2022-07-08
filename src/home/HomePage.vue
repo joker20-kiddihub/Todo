@@ -1,91 +1,57 @@
 <template>
-  <div>
-    <h1>Hi {{ account.user.username }}!</h1>
-    <i>You're logged in</i>
-    <p>
-      <router-link to="/login">Logout</router-link>
-    </p>
-    <h2 style="margin-left: 170px">TO DO LIST</h2>
-    <br />
-    <div class="hello">
-      {{ count }}
-      <div class="box p-4" style="backgroundcolor: #d5d778">
-        <div class="form-group ml-5 mr-5 row">
-          <div class="col-4">
-            <input
-              class="form-control"
-              autofocus
-              v-model.trim="newTodo"
-              @keyup.enter="Add"
-              placeholder="Click Enter to add..."
-            />
-          </div>
-          <div>
-            <button @click="Add">Add task</button>
-          </div>
-        </div>
-        <div class="m-5 text-left">
-          <b> You have {{ allTasks }} task </b>
-          <span class="badge badge-warning">
-            remaining task : {{ notDone }}
-          </span>
-          <span class="badge badge-success"> done task : {{ Done }} </span>
-        </div>
-        <div>
-          <table class="mt-3 listTodo">
-            <p v-if="toDos.length <= 0">Empty list</p>
-            <tr
-              v-for="item in toDos"
-              :key="item.id"
-              :class="{ completed: item.completed }"
-            >
-              <td>
-                <input class="mark" type="checkbox" v-model="item.completed" />
-                <span class="checkmark"> </span>
-              </td>
-              <td>
-                <div class="ok">
-                  <label @click="edit(item)" style="margin-top: 10px">
-                    {{ item.title | capitalize }}
-                  </label>
-                  <input
-                    v-if="editting == item && item.completed != true"
-                    v-model="item.title"
-                    :class="{}"
-                    @keyup.escape="doneEdit"
-                    @keyup.enter="doneEdit"
-                  />
-                </div>
-              </td>
-              <td width="20%">
-                <a
-                  @click="Delete(item)"
-                  title="Xóa"
-                  class="delete badge badge-danger"
-                >
-                  x
-                </a>
-              </td>
-              <!-- <td>
-                <select style="border-radius: 5px;">
-                  <option>10%</option> <option>20%</option> <option>30%</option>
-                  <option>40%</option> <option>50%</option> <option>60%</option>
-                  <option>70%</option> <option>80%</option> <option>90%</option>
-                </select>
-              </td>
-              <td>
-                <datepicker :language="vi"></datepicker>
-              </td> -->
-            </tr>
-          </table>
-        </div>
-      </div>
-      <br />
-      <span style="margin-left: 120px">
+  <v-container class="fill-height fluid">
+    <v-card width="100%" class="d-flex flex-column align-center elevation-0">
+      <h1 class="text-md-center mb-12 font-weight-light">TO DO LIST</h1>
+      <v-card
+        class="justify-center ma-0 elevation-10 d-flex"
+        height="450"
+        color="main"
+        width="80%"
+      >
+        <v-card width="60%" class="ma-0 elevation-0" color="transparent">
+          <v-item-group class="mt-6">
+            <v-row class="mt-8 align-start">
+              <v-text-field
+                outlined
+                clearable
+                placeholder="Todo..."
+                type="text"
+                solo
+              >
+              </v-text-field>
+              <v-btn height="56" x-large color="green" class="white--text">
+                ADD TASK
+              </v-btn>
+            </v-row>
+          </v-item-group>
+          <v-list color="main">
+            <v-list-item background-color="transparent">
+              <v-checkbox class="mt-0 pt-0"></v-checkbox>
+
+              <v-list-item-content class="pa-0">
+                <v-list-item-title>Notifications</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item background-color="transparent">
+              <v-checkbox class="mt-0 pt-0"></v-checkbox>
+
+              <v-list-item-content>
+                <v-list-item-title>Notifications</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+          <p class="text-md-center mt-12 font-weight-bold">
+            You have 3 task
+            <span color="red">remaining task: 2</span>
+            <span> done task: 1 </span>
+          </p>
+        </v-card>
+      </v-card>
+      <p class="text-md-center mt-12 font-weight-bold">
         Click in task to edit, Enter to submit
-      </span>
-    </div>
-  </div>
+      </p>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
