@@ -4,7 +4,7 @@
       <h1>Hi {{ account.user.username }}!</h1>
       <h1 class="text-md-center mb-12 font-weight-light">TO DO LIST</h1>
       <v-card
-        class="justify-center ma-0 elevation-10 d-flex"
+        class="justify-center ma-0 elevation-20 d-flex"
         height="450"
         color="main"
         width="80%"
@@ -152,46 +152,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.completed label {
-  text-decoration: line-through;
-}
-
-label {
-  cursor: pointer;
-}
-
-table {
-  width: 70%;
-}
-
-table,
-td {
-  border: 1px black;
-  text-align: left;
-}
-
-table td .delete {
-  display: none;
-}
-
-table tr:hover .delete {
-  display: block;
-}
-
-.mark {
-  width: 50px;
-  height: auto;
-}
-
-.ok {
-  position: relative;
-}
-
-.ok input {
-  position: absolute;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-}
-</style>
