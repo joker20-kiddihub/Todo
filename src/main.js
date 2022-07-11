@@ -15,9 +15,9 @@ import { configureFakeBackend } from "./_helpers";
 configureFakeBackend();
 
 new Vue({
-  el: "#app",
-  vuetify,
-  router,
-  store,
-  render: (h) => h(App),
+	el: "#app",
+	vuetify,
+	router,
+	store,
+	render: (h) => h(App),
 });

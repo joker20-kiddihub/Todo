@@ -10,17 +10,17 @@ import { users } from "./users.module";
 Vue.use(Vuex);
 const LOCAL_STORAGE_KEY = "todo";
 export const store = new Vuex.Store({
-  modules: {
-    alert,
-    account,
-    users,
-  },
-  state: {
-    toDos: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
-    newTodo: null,
-    editting: null,
-  },
-  mutations: mutations,
-  getters: getter,
-  actions: actions,
+	modules: {
+		alert,
+		account,
+		users,
+	},
+	state: {
+		toDos: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
+		newTodo: null,
+		editting: null,
+	},
+	mutations: mutations,
+	getters: getter,
+	actions: actions,
 });
