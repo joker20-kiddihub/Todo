@@ -14,10 +14,10 @@
 				>
 					<div>
 						<v-icon size="70">mdi-clipboard-list</v-icon>
-						<v-card-title class="justify-center"
+						<v-card-title class="justify-center; white--text"
 							>TodoApp</v-card-title
 						>
-						<v-card-subtitle class="text-center"
+						<v-card-subtitle class="text-center; white--text"
 							>Lists & Tasks</v-card-subtitle
 						>
 					</div>
@@ -56,7 +56,7 @@
 						</div>
 						<div class="form-group">
 							<v-btn
-								class="mr-4 mt-4"
+								class="mr-4 mt-4; white--text"
 								color="green"
 								block
 								:disabled="status.loggingIn"

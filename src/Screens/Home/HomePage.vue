@@ -5,8 +5,8 @@
 			<h3 class="mb-4">Hi {{ account.user.username }}!</h3>
 			<v-card
 				class="justify-center ma-0 elevation-20 d-flex"
-				height="550"
-				color="#D5D778"
+				height="500"
+				color="green"
 				width="1000"
 			>
 				<v-card
@@ -38,18 +38,18 @@
 						</v-row>
 					</v-item-group>
 					<div class="m-5 text-center mb-4">
-						<b> You have {{ allTasks }} task </b>
-						<span style="background: orange" class="rounded-5">
+						<b class="white--text"> You have {{ allTasks }} task </b>
+						<span style="background: orange; border-radius: 8px">
 							remaining task : {{ notDone }}
 						</span>
 
-						<span style="background: green"
+						<span style="background: green; border-radius: 8px"
 							>done task : {{ Done }}</span
 						>
 					</div>
 					<v-list
 						color="transparent"
-						height="400"
+						height="340"
 						class="overflow-auto"
 						dense
 					>
@@ -71,7 +71,7 @@
 									<label
 										width="380"
 										@click="edit(item)"
-										class="font-weight-medium mt-2"
+										class="font-weight-medium mt-2; white--text"
 										:class="{
 											'text-decoration-line-through':
 												item.completed,
@@ -106,6 +106,29 @@
 										>
 									</a>
 								</v-list-item-action>
+								<v-list-item-action>
+                  					<v-menu
+										v-model="menu"
+										:close-on-content-click="false"
+										:nudge-right="40"
+                    					transition="scale-transition"
+										offset-y
+										min-width="auto"
+									>
+                    					<template v-slot:activator="{ on, attrs }">
+                      						<v-text-field
+												class="white--text" 
+												v-model="date" 
+												label="Deadlines" 
+												prepend-icon="mdi-calendar" 
+												readonly
+                        						v-bind="attrs" 
+												v-on="on"
+											></v-text-field>
+                    					</template>
+                    					<v-date-picker color="green" v-model="date" @input="menu = false"></v-date-picker>
+                  					</v-menu>
+                				</v-list-item-action>
 							</v-list-item>
 						</v-list-item-group>
 					</v-list>
@@ -129,6 +152,8 @@ export default {
 			toDos: this.$store.state.toDos,
 			newTodo: this.$store.state.newToDo,
 			editting: this.$store.state.editting,
+			date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      		menu: false,
 		};
 	},
 	computed: {
