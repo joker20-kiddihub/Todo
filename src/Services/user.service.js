@@ -1,6 +1,6 @@
 import config from "./config";
 
-import { authHeader } from "../_helpers";
+import { authHeader } from "../Middlewares";
 
 export const userService = {
 	login,

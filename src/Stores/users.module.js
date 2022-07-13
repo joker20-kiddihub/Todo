@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { userService } from "../_services";
+import { userService } from "../Services";
 
 const state = {
 	all: {},
