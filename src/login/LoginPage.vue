@@ -81,10 +81,6 @@
 <script>
 import { mapState, mapActions } from "vuex";
 
-import colors from "../Configs/colors";
-
-console.log({ ...colors });
-
 export default {
 	data() {
 		return {

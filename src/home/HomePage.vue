@@ -51,14 +51,15 @@
 						color="transparent"
 						height="400"
 						class="overflow-auto"
+						dense
 					>
 						<p v-if="toDos.length <= 0">Empty list</p>
-						<div
-							v-for="item in toDos"
-							:key="item.id"
-							class="d-flex align-center"
-						>
-							<v-list-item>
+						<v-list-item-group>
+							<v-list-item
+								v-for="item in toDos"
+								:key="item.id"
+								class="d-flex align-center"
+							>
 								<v-list-item-action class="mr-4 mt-4">
 									<v-checkbox
 										class="mark"
@@ -68,19 +69,13 @@
 								</v-list-item-action>
 								<v-list-item-content class="pa-0">
 									<label
+										width="380"
 										@click="edit(item)"
 										class="font-weight-medium mt-2"
 										:class="{
 											'text-decoration-line-through':
 												item.completed,
 										}"
-										style="
-											display: block;
-											text-overflow: ellipsis;
-											width: 380px;
-											overflow: hidden;
-											white-space: nowrap;
-										"
 									>
 										{{
 											(editting == item) &
@@ -112,7 +107,7 @@
 									</a>
 								</v-list-item-action>
 							</v-list-item>
-						</div>
+						</v-list-item-group>
 					</v-list>
 				</v-card>
 			</v-card>
@@ -127,6 +122,7 @@
 <script>
 const LOCAL_STORAGE_KEY = "todo";
 import { mapState, mapActions } from "vuex";
+
 export default {
 	data() {
 		return {
@@ -163,6 +159,7 @@ export default {
 		}),
 		Add() {
 			this.$store.dispatch("addTask", this.newTodo);
+			this.newTodo = "";
 		},
 		Delete(item) {
 			this.$store.dispatch("deleteToDo", item);
