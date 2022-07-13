@@ -69,19 +69,13 @@
 								</v-list-item-action>
 								<v-list-item-content class="pa-0">
 									<label
+										width="380"
 										@click="edit(item)"
 										class="font-weight-medium mt-2"
 										:class="{
 											'text-decoration-line-through':
 												item.completed,
 										}"
-										style="
-											display: block;
-											text-overflow: ellipsis;
-											width: 380px;
-											overflow: hidden;
-											white-space: wap;
-										"
 									>
 										{{
 											(editting == item) &
