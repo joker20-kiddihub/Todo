@@ -43,8 +43,9 @@
 							remaining task : {{ notDone }}
 						</span>
 
-						<span style="background: green; border-radius: 8px"
-							>done task : {{ Done }}</span
+						<span style="background: green; border-radius: 8px" class="white--text"
+							>done task : {{ Done }}
+						</span
 						>
 					</div>
 					<v-list
