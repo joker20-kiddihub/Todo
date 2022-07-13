@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib/framework";
-import colors from "../Configs/colors";
+import colors from "../Config/colors";
 
 const opts = {
 	theme: {
