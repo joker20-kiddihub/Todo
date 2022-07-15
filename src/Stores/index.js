@@ -21,7 +21,8 @@ export const store = new Vuex.Store({
 		toDos: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
 		newTodo: null,
 		editting: null,
-		deadlines: null
+		deadlines: null,
+		priorityId: 2,
 	},
 	mutations: mutations,
 	getters: getter,

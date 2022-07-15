@@ -1,6 +1,6 @@
 export default {
-	addTask({ commit }, newToDo) {
-		commit("addTask", newToDo);
+	addTask({ commit }, payload) {
+		commit("addTask", payload);
 	},
 	deleteToDo({ commit }, item) {
 		commit("deleteToDo", item);

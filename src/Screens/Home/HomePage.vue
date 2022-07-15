@@ -26,6 +26,18 @@
 								v-model.trim="newTodo"
 							>
 							</v-text-field>
+							<v-select
+								v-model="priorityid"
+								:items="priority"
+								item-text="name"
+								item-value="id"
+								height="56"
+								style="width: 30px"
+								return-object
+								solo
+								single-line
+								color="color"
+							></v-select>
 							<v-btn
 								height="56"
 								x-large
@@ -38,15 +50,18 @@
 						</v-row>
 					</v-item-group>
 					<div class="m-5 text-center mb-4">
-						<b class="white--text"> You have {{ allTasks }} task </b>
+						<b class="white--text">
+							You have {{ allTasks }} task
+						</b>
 						<span style="background: orange; border-radius: 8px">
 							remaining task : {{ notDone }}
 						</span>
 
-						<span style="background: green; border-radius: 8px" class="white--text"
+						<span
+							style="background: green; border-radius: 8px"
+							class="white--text"
 							>done task : {{ Done }}
-						</span
-						>
+						</span>
 					</div>
 					<v-list
 						color="transparent"
@@ -96,6 +111,39 @@
 										@keyup.enter="doneEdit"
 									/>
 								</v-list-item-content>
+
+								<v-list-item-action>
+									<v-menu>
+										<template
+											v-slot:activator="{ on, attrs }"
+										>
+											<v-text-field
+												:value="date"
+												class="white--text"
+												label="Deadlines"
+												prepend-icon="mdi-calendar"
+												readonly
+												v-bind="attrs"
+												v-on="on"
+											></v-text-field>
+										</template>
+										<v-date-picker
+											color="green"
+											v-model="date"
+											:allowed-dates="disablePastDates"
+										></v-date-picker>
+									</v-menu>
+								</v-list-item-action>
+								<v-select
+									v-model="item.priority_id"
+									:items="priority"
+									item-text="name"
+									item-value="id"
+									return-object
+									solo
+									single-line
+									style="width: 10px"
+								></v-select>
 								<v-list-item-action>
 									<a
 										@click="Delete(item)"
@@ -107,22 +155,6 @@
 										>
 									</a>
 								</v-list-item-action>
-								<v-list-item-action>
-                  					<v-menu>
-                    					<template v-slot:activator="{ on, attrs }">
-                      						<v-text-field
-												:value="date"
-												class="white--text" 
-												label="Deadlines" 
-												prepend-icon="mdi-calendar" 
-												readonly
-                        						v-bind="attrs" 
-												v-on="on"
-											></v-text-field>
-                    					</template>
-                    					<v-date-picker color="green" v-model="date" :allowed-dates="disablePastDates"></v-date-picker>
-                  					</v-menu>
-                				</v-list-item-action>
 							</v-list-item>
 						</v-list-item-group>
 					</v-list>
@@ -147,6 +179,13 @@ export default {
 			newTodo: this.$store.state.newToDo,
 			editting: this.$store.state.editting,
 			date: this.$store.state.deadlines,
+			priorityid: this.$store.state.priorityId,
+
+			priority: [
+				{ id: 1, name: "High", color: "red" },
+				{ id: 2, name: "Medium", color: "blue" },
+				{ id: 3, name: "Low", color: "gray" },
+			],
 		};
 	},
 	computed: {
@@ -176,7 +215,12 @@ export default {
 			deleteUser: "delete",
 		}),
 		Add() {
-			this.$store.dispatch("addTask", this.newTodo);
+			const payload = {
+				newToDo: this.newTodo,
+				priorityId: this.priorityid.id || this.priorityid,
+			};
+
+			this.$store.dispatch("addTask", payload);
 			this.newTodo = "";
 		},
 		Delete(item) {
@@ -189,8 +233,8 @@ export default {
 			this.editting = null;
 		},
 		disablePastDates(val) {
-       	return val >= new Date().toISOString().substr(0, 10)
-    	},
+			return val >= new Date().toISOString().substr(0, 10);
+		},
 	},
 	watch: {
 		toDos: {
