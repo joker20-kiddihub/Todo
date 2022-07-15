@@ -46,7 +46,6 @@
 									'is-invalid': submitted && !username,
 								}"
 							></v-text-field>
-
 							<div
 								v-show="submitted && !username"
 								class="invalid-feedback"
@@ -91,13 +90,11 @@ export default {
 	computed: {
 		...mapState("account", ["status"]),
 	},
-
 	created() {
 		this.logout();
 	},
 	methods: {
 		...mapActions("account", ["login", "logout"]),
-		// eslint-disable-next-line no-unused-vars
 		handleSubmit(e) {
 			this.submitted = true;
 			const { username } = this;

@@ -108,18 +108,11 @@
 									</a>
 								</v-list-item-action>
 								<v-list-item-action>
-                  					<v-menu
-										v-model="menu"
-										:close-on-content-click="false"
-										:nudge-right="40"
-                    					transition="scale-transition"
-										offset-y
-										min-width="auto"
-									>
+                  					<v-menu>
                     					<template v-slot:activator="{ on, attrs }">
                       						<v-text-field
+												:value="date"
 												class="white--text" 
-												v-model="date" 
 												label="Deadlines" 
 												prepend-icon="mdi-calendar" 
 												readonly
@@ -127,7 +120,7 @@
 												v-on="on"
 											></v-text-field>
                     					</template>
-                    					<v-date-picker color="green" v-model="date" @input="menu = false"></v-date-picker>
+                    					<v-date-picker color="green" v-model="date" :allowed-dates="disablePastDates"></v-date-picker>
                   					</v-menu>
                 				</v-list-item-action>
 							</v-list-item>
@@ -153,8 +146,7 @@ export default {
 			toDos: this.$store.state.toDos,
 			newTodo: this.$store.state.newToDo,
 			editting: this.$store.state.editting,
-			date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      		menu: false,
+			date: this.$store.state.deadlines,
 		};
 	},
 	computed: {
@@ -196,6 +188,9 @@ export default {
 		doneEdit() {
 			this.editting = null;
 		},
+		disablePastDates(val) {
+       	return val >= new Date().toISOString().substr(0, 10)
+    	},
 	},
 	watch: {
 		toDos: {
