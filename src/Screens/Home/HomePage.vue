@@ -74,100 +74,111 @@
 					>
 						<p v-if="toDos.length <= 0">Empty list</p>
 						<v-list-item-group>
-							<v-list-item
-								v-for="item in toDos"
-								:key="item.id"
-								class="d-flex align-center"
-								style="height: 80px"
+							<v-data-table
+								:headers="priorityHeaders"
+								:items="toDos"
+								:items-per-page="5"
+								class="elevation-1 green"
 							>
-								<v-list-item-action class="mr-4 mt-4">
-									<v-checkbox
-										class="mark"
-										type="checkbox"
-										v-model="item.completed"
-									/>
-								</v-list-item-action>
-								<v-list-item-content class="pa-0">
-									<label
-										width="380"
-										@click="edit(item)"
-										class="font-weight-medium mt-2; white--text"
-										:class="{
-											'text-decoration-line-through':
-												item.completed,
-										}"
-									>
-										{{
-											(editing == item) &
-											(item.completed == false)
-												? ""
-												: item.title
-										}}
-									</label>
-									<v-text-field
-										v-if="
-											editing == item &&
-											item.completed != true
-										"
-										v-model="item.title"
-										:class="{}"
-										@keyup.escape="doneEdit"
-										@keyup.enter="doneEdit"
-									/>
-								</v-list-item-content>
-
-								<v-list-item-action>
-									<v-menu>
-										<template
-											v-slot:activator="{ on, attrs }"
-										>
+								<template
+									v-slot:item="{ item }"
+									class="d-flex align-center"
+									style="height: 80px"
+								>
+									<v-list-item width="100%">
+										<v-list-item-action class="mr-4 mt-4">
+											<v-checkbox
+												class="mark"
+												type="checkbox"
+												v-model="item.completed"
+											/>
+										</v-list-item-action>
+										<v-list-item-content class="pa-0">
+											<label
+												class="font-weight-medium mt-2; black--text"
+												:class="{
+													'text-decoration-line-through':
+														item.completed,
+												}"
+											>
+												{{
+													(editing == item) &
+													(item.completed == false)
+														? ""
+														: item.name
+												}}
+											</label>
 											<v-text-field
-												:value="date"
-												class="white--text"
-												label="Deadlines"
-												prepend-icon="mdi-calendar"
-												readonly
-												v-bind="attrs"
-												v-on="on"
-											></v-text-field>
-										</template>
-										<v-date-picker
-											color="green"
-											v-model="date"
-											:allowed-dates="disablePastDates"
-										></v-date-picker>
-									</v-menu>
-								</v-list-item-action>
+												v-if="
+													editing == item &&
+													item.completed != true
+												"
+												v-model="item.name"
+												:class="{}"
+												@keyup.escape="doneEdit"
+												@keyup.enter="doneEdit"
+											/>
+										</v-list-item-content>
 
-								<v-list-item-action class="pt-5">
-									<v-select
-										v-model="item.priority_id"
-										:items="priorities"
-										item-text="name"
-										item-value="id"
-										solo
-										style="width: 120px"
-										:background-color="
-											priorities[item.priority_id]
-												.backgroundColor
-										"
-										:color="
-											priorities[item.priority_id].color
-										"
-									></v-select>
-								</v-list-item-action>
-								<v-list-item-action>
-									<a
-										@click="Delete(item)"
-										title="Xóa"
-										class="delete badge badge-danger"
-									>
-										<v-icon size="30"
-											>mdi-trash-can-outline</v-icon
-										>
-									</a>
-								</v-list-item-action>
-							</v-list-item>
+										<v-list-item-action>
+											<v-menu>
+												<template
+													v-slot:activator="{
+														on,
+														attrs,
+													}"
+												>
+													<v-text-field
+														:value="date"
+														class="white--text"
+														label="Deadlines"
+														prepend-icon="mdi-calendar"
+														readonly
+														v-bind="attrs"
+														v-on="on"
+													></v-text-field>
+												</template>
+												<v-date-picker
+													color="green"
+													v-model="date"
+													:allowed-dates="
+														disablePastDates
+													"
+												></v-date-picker>
+											</v-menu>
+										</v-list-item-action>
+
+										<v-list-item-action class="pt-5">
+											<v-select
+												v-model="item.priority_id"
+												:items="priorities"
+												item-text="name"
+												item-value="id"
+												solo
+												style="width: 120px"
+												:background-color="
+													priorities[item.priority_id]
+														.backgroundColor
+												"
+												:color="
+													priorities[item.priority_id]
+														.color
+												"
+											></v-select>
+										</v-list-item-action>
+										<v-list-item-action>
+											<a
+												@click="Delete(item)"
+												class="delete badge badge-danger"
+											>
+												<v-icon size="30"
+													>mdi-trash-can-outline</v-icon
+												>
+											</a>
+										</v-list-item-action>
+									</v-list-item>
+								</template>
+							</v-data-table>
 						</v-list-item-group>
 					</v-list>
 				</v-card>
@@ -192,6 +203,16 @@ export default {
 			editing: this.$store.state.editing,
 			date: this.$store.state.deadlines,
 			priority: this.$store.state.priorityId,
+			expanded: [],
+			singleExpand: false,
+			priorityHeaders: [
+				{
+					text: "Priorities",
+					align: "end",
+					value: "priority_id",
+				},
+			],
+
 			priorities: [
 				{
 					id: 0,
