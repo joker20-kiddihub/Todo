@@ -5,12 +5,12 @@ export default {
 		if (payload.newToDo.length) {
 			state.toDos.push({
 				id: Math.floor(Math.random() * 100),
-				title: payload.newToDo,
+				name: payload.newToDo,
 				completed: false,
 				user_id: account.state.user.id,
 				create_at: Date().toString(),
 				priority_id: payload.priorityId,
-				deadline: payload.deadlines
+				deadline: payload.deadlines,
 			});
 		}
 		state.newTodo = null;
