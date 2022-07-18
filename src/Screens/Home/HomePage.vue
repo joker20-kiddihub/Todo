@@ -24,7 +24,7 @@
 								clearable
 								type="text"
 								solo
-								placeholder="Click Enter to add..."
+								placeholder="Content of task..."
 								@keyup.enter="Add"
 								v-model.trim="newTodo"
 							>
@@ -122,7 +122,13 @@
 													width: 100px;
 												"
 											>
-												<v-menu>
+												<v-menu
+													:close-on-content-click="false"
+          											:nudge-right="40"
+          											transition="scale-transition"
+          											offset-y
+          											min-width="auto"
+												>
 													<template
 														v-slot:activator="{
 															on,
