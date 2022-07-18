@@ -25,7 +25,6 @@ export default {
 		}),
 	},
 	watch: {
-		// eslint-disable-next-line no-unused-vars
 		$route(to, from) {
 			this.clearAlert();
 		},

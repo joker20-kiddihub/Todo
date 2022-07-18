@@ -1,15 +1,16 @@
 import { account } from "./account.module";
 
 export default {
-	addTask(state, newToDo, deadlines) {
-		if (newToDo.length) {
+	addTask(state, payload) {
+		if (payload.newToDo.length) {
 			state.toDos.push({
 				id: Math.floor(Math.random() * 100),
-				title: newToDo,
+				title: payload.newToDo,
 				completed: false,
-				deadlines: deadlines,
 				user_id: account.state.user.id,
 				create_at: Date().toString(),
+				priority_id: payload.priorityId,
+				deadline: payload.deadlines
 			});
 		}
 		state.newTodo = null;
@@ -19,6 +20,6 @@ export default {
 		state.toDos.splice(index, 1);
 	},
 	doneEdit(state) {
-		state.editting = null;
+		state.editing = null;
 	},
 };
