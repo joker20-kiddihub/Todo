@@ -19,6 +19,6 @@ export default {
 		state.toDos.splice(index, 1);
 	},
 	doneEdit(state) {
-		state.editting = null;
+		state.editing = null;
 	},
 };

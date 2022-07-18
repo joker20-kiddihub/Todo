@@ -1,6 +1,9 @@
 <template>
 	<v-container class="fill-height fluid justify-center">
-		<v-card class="d-flex flex-column align-center elevation-0">
+		<v-card
+			class="d-flex flex-column align-center elevation-0"
+			width="1000px"
+		>
 			<h1 class="text-md-center mb-2 font-weight-light">TO DO LIST</h1>
 			<h3 class="mb-4">Hi {{ account.user.username }}!</h3>
 			<v-card
@@ -10,12 +13,12 @@
 				width="1000"
 			>
 				<v-card
-					width="60%"
 					class="ma-0 elevation-0"
 					color="transparent"
+					width="70%"
 				>
 					<v-item-group class="mt-6">
-						<v-row class="mt-8 align-start">
+						<v-row class="mt-8 align-start ma-0" width="60%">
 							<v-text-field
 								outlined
 								clearable
@@ -27,16 +30,17 @@
 							>
 							</v-text-field>
 							<v-select
-								v-model="priorityid"
-								:items="priority"
+								v-model="priority"
+								:items="priorities"
 								item-text="name"
 								item-value="id"
 								height="56"
-								style="width: 30px"
-								return-object
+								style="width: 10px"
 								solo
-								single-line
-								color="color"
+								:background-color="
+									priorities[priority].backgroundColor
+								"
+								:color="priorities[priority].color"
 							></v-select>
 							<v-btn
 								height="56"
@@ -67,7 +71,6 @@
 						color="transparent"
 						height="340"
 						class="overflow-auto"
-						dense
 					>
 						<p v-if="toDos.length <= 0">Empty list</p>
 						<v-list-item-group>
@@ -75,6 +78,7 @@
 								v-for="item in toDos"
 								:key="item.id"
 								class="d-flex align-center"
+								style="height: 80px"
 							>
 								<v-list-item-action class="mr-4 mt-4">
 									<v-checkbox
@@ -94,7 +98,7 @@
 										}"
 									>
 										{{
-											(editting == item) &
+											(editing == item) &
 											(item.completed == false)
 												? ""
 												: item.title
@@ -102,7 +106,7 @@
 									</label>
 									<v-text-field
 										v-if="
-											editting == item &&
+											editing == item &&
 											item.completed != true
 										"
 										v-model="item.title"
@@ -134,16 +138,24 @@
 										></v-date-picker>
 									</v-menu>
 								</v-list-item-action>
-								<v-select
-									v-model="item.priority_id"
-									:items="priority"
-									item-text="name"
-									item-value="id"
-									return-object
-									solo
-									single-line
-									style="width: 10px"
-								></v-select>
+
+								<v-list-item-action class="pt-5">
+									<v-select
+										v-model="item.priority_id"
+										:items="priorities"
+										item-text="name"
+										item-value="id"
+										solo
+										style="width: 120px"
+										:background-color="
+											priorities[item.priority_id]
+												.backgroundColor
+										"
+										:color="
+											priorities[item.priority_id].color
+										"
+									></v-select>
+								</v-list-item-action>
 								<v-list-item-action>
 									<a
 										@click="Delete(item)"
@@ -177,14 +189,28 @@ export default {
 		return {
 			toDos: this.$store.state.toDos,
 			newTodo: this.$store.state.newToDo,
-			editting: this.$store.state.editting,
+			editing: this.$store.state.editing,
 			date: this.$store.state.deadlines,
-			priorityid: this.$store.state.priorityId,
-
-			priority: [
-				{ id: 1, name: "High", color: "red" },
-				{ id: 2, name: "Medium", color: "blue" },
-				{ id: 3, name: "Low", color: "gray" },
+			priority: this.$store.state.priorityId,
+			priorities: [
+				{
+					id: 0,
+					name: "High",
+					backgroundColor: "#ff7d7d",
+					color: "#fc0000",
+				},
+				{
+					id: 1,
+					name: "Medium",
+					backgroundColor: "#87b3fa",
+					color: "#0047FF",
+				},
+				{
+					id: 2,
+					name: "Low",
+					backgroundColor: "#8c8c8c",
+					color: "#000000",
+				},
 			],
 		};
 	},
@@ -217,7 +243,7 @@ export default {
 		Add() {
 			const payload = {
 				newToDo: this.newTodo,
-				priorityId: this.priorityid.id || this.priorityid,
+				priorityId: this.priority.id || this.priority,
 			};
 
 			this.$store.dispatch("addTask", payload);
@@ -227,10 +253,10 @@ export default {
 			this.$store.dispatch("deleteToDo", item);
 		},
 		edit(item) {
-			this.editting = item;
+			this.editing = item;
 		},
 		doneEdit() {
-			this.editting = null;
+			this.editing = null;
 		},
 		disablePastDates(val) {
 			return val >= new Date().toISOString().substr(0, 10);
