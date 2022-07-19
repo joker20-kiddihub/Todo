@@ -21,7 +21,7 @@ export const store = new Vuex.Store({
 		toDos: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
 		newTodo: null,
 		editting: null,
-		deadlines: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+		deadlines: null,
 		priorityId: 1,
 	},
 	mutations: mutations,
