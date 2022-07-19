@@ -1,7 +1,7 @@
 <template>
 	<v-container class="fill-height justify-center">
 		<v-card
-			class="justify-center row ma-0 elevation-10"
+			class="justify-center row ma-0 elevation-10 d-flex"
 			height="570"
 			max-width="1200"
 		>
