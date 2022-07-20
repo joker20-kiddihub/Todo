@@ -46,6 +46,7 @@ export default {
 			newTodo: this.$store.state.newToDo,
 			priority: this.$store.state.priorityId,
 			deadline: this.$store.state.deadlines,
+			modal: false,
 		};
 	},
 

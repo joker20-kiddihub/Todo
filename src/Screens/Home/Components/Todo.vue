@@ -27,16 +27,16 @@
 		</td>
 		<td>
 			<v-list-item-action style="padding: 10px 10px 0 0; width: 100px">
-				<v-menu
-					:close-on-content-click="false"
-					:nudge-right="40"
-					transition="scale-transition"
-					offset-y
-					min-width="auto"
+				<v-dialog
+					ref="dialog"
+          			v-model="modal"
+          			:return-value.sync="deadline"
+          			persistent
+          			width="290px"
 				>
 					<template v-slot:activator="{ on, attrs }">
 						<v-text-field
-							:value="item.deadline"
+							v-model="item.deadline"
 							readonly
 							v-bind="attrs"
 							v-on="on"
@@ -44,13 +44,30 @@
 					</template>
 					<v-date-picker
 						color="green"
+						scrollable
 						year-icon="mdi-calendar-blank"
       					prev-icon="mdi-skip-previous"
       					next-icon="mdi-skip-next"
 						v-model="item.deadline"
 						:allowed-dates="disablePastDates"
-					></v-date-picker>
-				</v-menu>
+					>
+					<v-spacer></v-spacer>
+            		<v-btn
+              		text
+              		color="#1F9652"
+              		@click="modal = false"
+            		>
+              			Cancel
+            		</v-btn>
+            		<v-btn
+              		text
+              		color="#1F9652"
+              		@click="$refs.dialog.save(deadline)"
+            		>
+              			OK
+            		</v-btn>
+					</v-date-picker>
+				</v-dialog>
 			</v-list-item-action>
 		</td>
 		<td>
@@ -89,6 +106,8 @@ export default {
 		return {
 			toDos: this.$store.state.toDos,
 			editing: this.$store.state.editing,
+			deadline: this.$store.state.deadlines,
+			modal: false,
 		};
 	},
 

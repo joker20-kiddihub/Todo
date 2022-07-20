@@ -5,7 +5,7 @@
 			remaining task : {{ notDone }}
 		</span>
 
-		<span style="background: #1f9652; border-radius: 8px" class="white--text"
+		<span style="background: #1F9652; border-radius: 8px" class="white--text"
 			>done task : {{ Done }}
 		</span>
 	</div>
