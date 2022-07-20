@@ -1,6 +1,6 @@
 import config from "./config";
 
-import { authHeader } from "../Middlewares";
+import { authHeader } from "../Routes";
 
 export const userService = {
 	login,

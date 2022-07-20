@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<b class="white--text"> You have {{ allTasks }} task </b>
+		<b> You have {{ allTasks }} task </b>
 		<span style="background: orange; border-radius: 8px">
 			remaining task : {{ notDone }}
 		</span>
 
-		<span style="background: green; border-radius: 8px" class="white--text"
+		<span style="background: #1f9652; border-radius: 8px" class="white--text"
 			>done task : {{ Done }}
 		</span>
 	</div>

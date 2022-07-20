@@ -5,7 +5,6 @@
 			<v-card
 				class="justify-center ma-0 elevation-20 d-flex"
 				height="500"
-				color="green"
 				width="1200"
 			>
 				<v-card
@@ -22,7 +21,7 @@
 					</div>
 					<v-list
 						color="transparent"
-						height="340"
+						height="310"
 						class="overflow-auto"
 					>
 						<TodoList
@@ -78,19 +77,24 @@ export default {
 			priorities: [
 				{
 					id: 0,
+					name: "Priority",
+					backgroundColor: "grey"
+				},
+				{
+					id: 1,
 					name: "High",
 					backgroundColor: "red",
 				},
 				{
-					id: 1,
+					id: 2,
 					name: "Medium",
 					backgroundColor: "orange",
 				},
 				{
-					id: 2,
+					id: 3,
 					name: "Low",
 					backgroundColor: "yellow",
-				},
+				}
 			],
 		};
 	},

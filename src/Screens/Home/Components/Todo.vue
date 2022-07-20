@@ -44,6 +44,9 @@
 					</template>
 					<v-date-picker
 						color="green"
+						year-icon="mdi-calendar-blank"
+      					prev-icon="mdi-skip-previous"
+      					next-icon="mdi-skip-next"
 						v-model="item.deadline"
 						:allowed-dates="disablePastDates"
 					></v-date-picker>

@@ -1,12 +1,11 @@
 <template>
 	<div>
-		<p v-if="toDos.length <= 0">Empty list</p>
+		<p v-if="toDos.length <= 0">All clear</p>
 		<v-list-item-group>
 			<v-data-table
 				:headers="priorityHeaders"
 				:items="toDos"
 				:items-per-page="15"
-				class="elevation-1 green"
 			>
 				<template v-slot:item="{ item }">
 					<Todo :item="item" :priorities="priorities" />

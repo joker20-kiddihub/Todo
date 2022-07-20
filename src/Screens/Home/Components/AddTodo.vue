@@ -5,7 +5,7 @@
 			clearable
 			type="text"
 			solo
-			placeholder="Content of task..."
+			placeholder="Type here..."
 			@keyup.enter="Add"
 			v-model.trim="newTodo"
 			style="width: 40%"
@@ -24,7 +24,7 @@
 		<v-btn
 			height="56"
 			x-large
-			color="blue"
+			color="#1F9652"
 			class="white--text"
 			@click="Add"
 		>
