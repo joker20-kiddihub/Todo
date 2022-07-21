@@ -1,11 +1,13 @@
 <template>
-	<div>
+	<div class="mt-8 d-flex justify-space-around">
 		<b> You have {{ allTasks }} task </b>
 		<span style="background: orange; border-radius: 8px">
 			remaining task : {{ notDone }}
 		</span>
 
-		<span style="background: #1F9652; border-radius: 8px" class="white--text"
+		<span
+			style="background: #1f9625; border-radius: 8px"
+			class="white--text"
 			>done task : {{ Done }}
 		</span>
 	</div>

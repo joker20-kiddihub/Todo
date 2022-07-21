@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { userService } from "../Services";
 import { router } from "../router";
 

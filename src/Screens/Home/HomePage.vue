@@ -1,39 +1,40 @@
 <template>
-	<v-container class="fill-height fluid justify-center">
-		<v-card class="elevation-0" width="1000px">
-			<Header />
-			<v-card
-				class="justify-center ma-0 elevation-20 d-flex"
-				height="500"
-				width="1200"
-			>
+	<div>
+		<Header />
+		<v-container class="fill-height fluid justify-center pa-0">
+			<v-card class="elevation-0" width="1000px">
 				<v-card
-					class="ma-0 elevation-0"
-					color="transparent"
-					width="80%"
+					class="justify-center ma-0 elevation-0 d-flex"
+					height="500"
+					color="white"
+					width="1200"
 				>
-					<v-item-group class="mt-6">
-						<AddTodo :priorities="priorities" />
-					</v-item-group>
-
-					<div class="m-5 text-center mb-4">
-						<CountTodo />
-					</div>
-					<v-list
+					<v-card
+						class="ma-0 elevation-0"
 						color="transparent"
-						height="310"
-						class="overflow-auto"
+						width="95%"
 					>
-						<TodoList
-							:priorityHeaders="priorityHeaders"
-							:priorities="priorities"
-						/>
-					</v-list>
+						<AddTodo :priorities="priorities" />
+
+						<div class="m-5 text-center mb-4">
+							<CountTodo />
+						</div>
+						<v-list
+							color="transparent"
+							height="340"
+							class="overflow-auto"
+						>
+							<TodoList
+								:priorityHeaders="priorityHeaders"
+								:priorities="priorities"
+							/>
+						</v-list>
+					</v-card>
 				</v-card>
+				<Footer />
 			</v-card>
-			<Footer />
-		</v-card>
-	</v-container>
+		</v-container>
+	</div>
 </template>
 
 <script>
@@ -57,44 +58,44 @@ export default {
 					align: "start",
 					value: "completed",
 				},
-				{
-					text: "Todo",
-					value: "name",
-				},
+
 				{
 					text: "Deadlines",
 					value: "deadline",
+					align: "",
 				},
 				{
 					text: "Priorities",
 					value: "priority_id",
-				},
-				{
-					text: "Delete",
+					value: "start",
 				},
 			],
 
 			priorities: [
 				{
 					id: 0,
-					name: "Priority",
-					backgroundColor: "grey"
+					name: "High",
+					color: "red",
+					icon: "mdi-flag",
 				},
 				{
 					id: 1,
-					name: "High",
-					backgroundColor: "red",
+					name: "Medium",
+					color: "orange",
+					icon: "mdi-flag",
 				},
 				{
 					id: 2,
-					name: "Medium",
-					backgroundColor: "orange",
+					name: "Low",
+					color: "yellow",
+					icon: "mdi-flag",
 				},
 				{
 					id: 3,
 					name: "Low",
-					backgroundColor: "yellow",
-				}
+					color: "gray",
+					icon: "mdi-flag",
+				},
 			],
 		};
 	},

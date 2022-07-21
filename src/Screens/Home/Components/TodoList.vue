@@ -1,11 +1,12 @@
 <template>
 	<div>
-		<p v-if="toDos.length <= 0">All clear</p>
+		<p v-if="toDos.length <= 0">Empty list</p>
 		<v-list-item-group>
 			<v-data-table
 				:headers="priorityHeaders"
 				:items="toDos"
 				:items-per-page="15"
+				class="elevation-1 white"
 			>
 				<template v-slot:item="{ item }">
 					<Todo :item="item" :priorities="priorities" />
@@ -26,6 +27,7 @@ export default {
 		priorities: Array,
 		priorityHeaders: Array,
 	},
+
 	data() {
 		return {
 			toDos: this.$store.state.toDos,

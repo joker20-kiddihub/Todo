@@ -4,7 +4,6 @@ const colors = {
 	pink: "F66D9B",
 	light: "F8F9FA",
 	yellow: "FFC107",
-	green: "1F9652",
 	teal: "4DC0B5",
 	cyan: "17A2B8",
 	red: "FE5858",
