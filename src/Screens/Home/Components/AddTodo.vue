@@ -5,7 +5,7 @@
 				<v-text-field
 					clearable
 					type="text"
-					placeholder="Content of task..."
+					placeholder="Type here..."
 					@keyup.enter="Add"
 					v-model.trim="newTodo"
 					flat
@@ -32,10 +32,12 @@
 							>
 						</template>
 						<template slot="item" slot-scope="data">
-							<v-icon :color="data.item.color">{{
-								data.item.icon
-							}}</v-icon>
-							<span class="ml-12">{{ data.item.name }}</span>
+							<v-icon :color="data.item.color">
+								{{ data.item.icon }}
+							</v-icon>
+							<span class="ml-12">
+								{{ data.item.name }}
+							</span>
 						</template>
 					</v-select>
 				</div>
@@ -79,8 +81,6 @@
 </template>
 
 <script>
-const LOCAL_STORAGE_KEY = "todo";
-import { mapState, mapActions } from "vuex";
 
 export default {
 	props: {

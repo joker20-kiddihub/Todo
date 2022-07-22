@@ -9,7 +9,7 @@
 				<v-card
 					class="text-center d-flex flex-column align-center justify-center"
 					height="100%"
-					color="white"
+					color="#1F9652"
 					tile
 				>
 					<div>
@@ -56,7 +56,7 @@
 						<div class="form-group">
 							<v-btn
 								class="mr-4 mt-4; white--text"
-								color="white"
+								color="#1F9652"
 								block
 								:disabled="status.loggingIn"
 								@click="handleSubmit"

@@ -62,7 +62,6 @@
 						<v-date-picker
 							color="green"
 							scrollable
-							scrollable
 							year-icon="mdi-calendar-blank"
 							prev-icon="mdi-skip-previous"
 							next-icon="mdi-skip-next"

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<p v-if="toDos.length <= 0">Empty list</p>
+		<p v-if="toDos.length <= 0" class="text-center"> All clear </p>
 		<v-list-item-group>
 			<v-data-table
 				:headers="priorityHeaders"
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-const LOCAL_STORAGE_KEY = "todo";
 import Todo from "./Todo.vue";
 
 export default {
