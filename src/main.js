@@ -11,6 +11,7 @@ Vue.use(VeeValidate);
 Vue.use(Vuex);
 Vue.config.productionTip = false;
 
+
 import { configureFakeBackend } from "./Routes";
 configureFakeBackend();
 

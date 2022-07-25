@@ -1,90 +1,135 @@
 <template>
-	<v-card>
-		<v-item-group class="mt-6">
-			<div class="d-flex">
-				<v-text-field
-					clearable
-					type="text"
-					placeholder="Type here..."
-					@keyup.enter="Add"
-					v-model.trim="newTodo"
-					flat
-					solo
-					class="ma-0 pa-0"
-					hide-details
-				>
-				</v-text-field>
-				<div
-					style="width: 20%"
-					class="d-flex align-center justify-center"
-				>
-					<v-select
-						:items="priorities"
-						v-model="priority"
-						:item-text="() => ``"
-						item-value="id"
-						class="ma-0 pa-0"
+		<v-card elevation="0" class="rounded-lg mb-4" >
+			<v-card class="mt-6" color="body"   elevation="0">
+				<div class="d-flex align-center " >
+					<v-text-field
+						type="text"
+						placeholder="Nhập ở đây..."
+						@keyup.enter="Add"
+						v-model.trim="newTodo"
+						outlined
+						dense
+						class=" rounded-lg pa-2"
 						hide-details
+						background-color="white"
 					>
-						<template v-slot:prepend-inner>
-							<v-icon :color="priorities[priority].color"
-								>mdi-flag</v-icon
-							>
-						</template>
-						<template slot="item" slot-scope="data">
-							<v-icon :color="data.item.color">
-								{{ data.item.icon }}
-							</v-icon>
-							<span class="ml-12">
-								{{ data.item.name }}
-							</span>
-						</template>
-					</v-select>
+						<v-icon slot="prepend-inner" color="green">
+							mdi-keyboard-outline
+						</v-icon>
+					</v-text-field>
+					
 				</div>
-			</div>
-			<div
-				class="d-flex justify-space-between pl-4 pr-8"
-				style="height: 40px"
-			>
-				<div>
-					<v-menu
-						:close-on-content-click="false"
-						:nudge-right="40"
-						transition="scale-transition"
-						offset-y
-						min-width="auto"
-						style="width: 20px"
+				<div class="d-flex justify-space-between align-center pa-2 mt-4">
+					  <v-item-group class="d-flex align-center">
+						<div style="width: 140px" class="d-flex align-center ">
+						<v-dialog
+							ref="dialog"
+							v-model="modal"
+							:return-value.sync="deadline"
+							persistent
+							width="290px"
+						>
+							<template v-slot:activator="{ on, attrs }">
+								<v-text-field
+									style=" font-size: 0.8em;"
+									v-model="deadline"
+									readonly
+									v-bind="attrs"
+									v-on="on"
+									placeholder="Thời hạn"
+									hide-details
+									outlined
+									class="rounded-lg mr-4"
+									dense
+									background-color="white"
+								>
+									<v-icon slot="prepend-inner" color="green" >
+										mdi-calendar
+									</v-icon>
+								</v-text-field>
+							</template>
+							<v-date-picker
+								color="green"
+								scrollable
+								year-icon="mdi-calendar-blank"
+								prev-icon="mdi-skip-previous"
+								next-icon="mdi-skip-next"
+								v-model="deadline"
+								:allowed-dates="disablePastDates"
+								><v-spacer></v-spacer>
+								<v-btn
+									text
+									color="#1F9652"
+									@click="modal = false"
+								>
+									Cancel
+								</v-btn>
+								<v-btn
+									text
+									color="#1F9652"
+									@click="$refs.dialog.save(deadline)"
+								>
+									OK 
+								</v-btn>
+							</v-date-picker>
+						</v-dialog>
+					</div>
+					<div
+						style="width: 120px"
+						class="d-flex align-center justify-center"
 					>
-						<template v-slot:activator="{ on, attrs }">
-							<v-btn
-								icon
-								color="#1f9652"
-								v-bind="attrs"
-								v-on="on"
-							>
-								<v-icon>mdi-calendar</v-icon>
-							</v-btn>
-						</template>
-						<v-date-picker
-							color="#1f9652"
-							v-model="deadline"
-							:allowed-dates="disablePastDates"
-						></v-date-picker>
-					</v-menu>
+						<v-select
+							:items="priorities"
+							v-model="priority"
+							item-text="name"
+							item-value="id"
+							label="Ưu tiên"
+							style="font-size: 0.8em"
+							hide-details
+							outlined
+							class="rounded-lg "
+							dense
+							background-color="white"
+						>
+							<template slot="append">
+								<v-icon color="green">mdi-arrow-down-drop-circle-outline</v-icon>
+							</template>
+
+							<template slot="item" slot-scope="data">
+								<v-icon :color="data.item.color">
+									mdi-rectangle
+								</v-icon>
+
+								<span class="ml-4">
+									{{ data.item.name }}
+								</span>
+							</template>
+						</v-select>
+					</div>
+					</v-item-group>
+					<div>
+						<v-btn
+						@click="Add"
+						class="white--text"
+						color="green rounded-lg"
+					>
+						Thêm
+					</v-btn>
+					</div>
 				</div>
-				<button @click="Add" class="mr-0">
-					<v-icon color="#1f9652"> mdi-plus-circle-outline </v-icon>
-				</button>
-			</div>
-		</v-item-group>
-	</v-card>
+			</v-card>
+		</v-card>
+	</v-container>
 </template>
 
 <script>
 
+
+
 export default {
 	props: {
 		priorities: Array,
+		item: Object,
 	},
 	data() {
 		return {
@@ -94,6 +139,7 @@ export default {
 			date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
 				.toISOString()
 				.substr(0, 10),
+
 			modal: false,
 		};
 	},

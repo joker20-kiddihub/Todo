@@ -1,13 +1,29 @@
 <template>
 	<div>
 		<Header />
-		<v-container class="fill-height fluid justify-center pa-0">
+		<v-container class="fluid justify-center pa-0 d-flex align-center">
 			<v-card class="elevation-0" width="1000px">
-				<v-card class="justify-center ma-0 elevation-0 d-flex" height="500" color="white" width="1200">
-					<v-card class="ma-0 elevation-0" color="transparent" width="95%">
-							<AddTodo :priorities="priorities"/>
-						<v-list color="transparent" height="340" class="overflow-auto">
-							<TodoList :priorityHeaders="priorityHeaders" :priorities="priorities" />
+				<v-card
+					class="justify-center ma-0 elevation-0 d-flex"
+					height="500"
+					color="white"
+					width="1200"
+				>
+					<v-card
+						class="ma-0 elevation-0"
+						color="transparent"
+						width="95%"
+					>
+						<AddTodo :priorities="priorities" />
+						<v-list
+							color="transparent"
+							height="340"
+							class="overflow-auto"
+						>
+							<TodoList
+								:priorityHeaders="priorityHeaders"
+								:priorities="priorities"
+							/>
 						</v-list>
 					</v-card>
 				</v-card>
@@ -26,6 +42,8 @@ import TodoList from "./Components/TodoList.vue";
 import Header from "./Components/Header.vue";
 import Footer from "./Components/Footer.vue";
 
+import colors from "../../Config/colors";
+
 export default {
 	components: { AddTodo, TodoList, Header, Footer },
 	data() {
@@ -39,39 +57,41 @@ export default {
 			singleExpand: false,
 			priorityHeaders: [
 				{
-					text: "Complete",
-					align: "start",
+					text: "Ưu tiên",
+					value: "priority_id",
+				},
+
+				{
+					text: "Nội dung",
+					value: "name",
+				},
+				{
+					text: "Hoàn thành",
 					value: "completed",
 				},
 				{
-					text: "Deadlines",
+					text: "Thời hạn",
 					value: "deadline",
-					align: "",
-				},
-				{
-					text: "Priorities",
-					value: "priority_id",
-					value: "start",
 				},
 			],
 
 			priorities: [
 				{
 					id: 0,
-					name: "High",
-					color: "red",
+					name: "Cao",
+					color: colors.red,
 					icon: "mdi-flag",
 				},
 				{
 					id: 1,
-					name: "Medium",
-					color: "orange",
+					name: "Trung bình",
+					color: colors.yellow,
 					icon: "mdi-flag",
 				},
 				{
 					id: 2,
-					name: "Low",
-					color: "#1F9652",
+					name: "Thấp",
+					color: colors.green,
 					icon: "mdi-flag",
 				},
 			],

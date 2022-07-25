@@ -1,22 +1,23 @@
 <template>
 	<div class="justify-space-around text-center">
 		<b> YOU HAVE {{ allTasks }} TASK </b>
-		<br/>
+		<br />
 		<span style="background: orange; border-radius: 8px">
 			Remaining task : {{ notDone }}
 		</span>
 
 		<span
 			style="background: #1f9625; border-radius: 8px"
-			class="white--text">
+			class="white--text"
+		>
 			Done task : {{ Done }}
 		</span>
-		<br>
+
+		<br />
 		<router-link to="/login" class="text-center">Logout</router-link>
 	</div>
 </template>
 <script>
-
 export default {
 	computed: {
 		notDone() {
