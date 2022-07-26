@@ -103,7 +103,7 @@ export default {
 				},
 				{
 					id: 1,
-					name: "Trung bình",
+					name: "T.bình",
 					color: colors.yellow,
 					icon: "mdi-flag",
 				},
