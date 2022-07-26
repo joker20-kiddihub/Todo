@@ -48,7 +48,7 @@ export default {
 
 	methods: {
 		onResize() {
-			if (window.innerWidth < 376) this.isMobile = true;
+			if (window.innerWidth < 550) this.isMobile = true;
 			else this.isMobile = false;
 		},
 		toggleAll() {
