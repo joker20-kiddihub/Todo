@@ -1,47 +1,73 @@
 <template>
-	<tr>
-		<td class="pa-0 d-flex align-center">
-			<div style="height: 70%; width: 7px; background-color: black"></div>
-			<h4
-				:style="{ color: priorities[item.priority_id].color }"
-				class="ml-2"
-			>
-				{{ priorities[item.priority_id].name }}
-			</h4>
+	<tr
+		style="border-bottom: thin solid rgba(0, 0, 0, 0.12) !important"
+		class="pt-4 pb-4"
+	>
+		<td :class="isMobile ? 'is-mobile' : 'priority'">
+			<div :class="!isMobile ? 'mobile-header' : ''">Ưu tiên</div>
+			<div class="d-flex align-center">
+				<div
+					style="height: 40px; width: 9px"
+					:style="{
+						backgroundColor: priorities[item.priority_id].color,
+					}"
+					class="rounded-xl ml-2"
+				></div>
+				<h4
+					:style="{ color: priorities[item.priority_id].color }"
+					class="ml-2"
+				>
+					{{ priorities[item.priority_id].name }}
+				</h4>
+			</div>
 		</td>
-		<td>
-			<h2
-				class="mt-1 black--text font-weight-regular subtitle-1"
-				:class="{
-					'text-decoration-line-through': item.completed,
-				}"
-			>
-				{{
-					(editing == item) & (item.completed == false)
-						? ""
-						: item.name
-				}}
-			</h2>
-			<v-text-field
-				v-if="editing == item && item.completed != true"
-				v-model="item.name"
-				hide-details
-				@keyup.escape="doneEdit"
-				@keyup.enter="doneEdit"
-			/>
+		<td :class="isMobile ? 'is-mobile' : ''" style="width: 40%">
+			<div :class="!isMobile ? 'mobile-header' : ''">Nội dung</div>
+			<div style="max-width: 270px">
+				<h2
+					style="line-height: 1.3rem"
+					:style="isMobile ? { 'margin-left': '40px' } : ''"
+					class="mt-1 black--text font-weight-regular subtitle-1"
+					:class="{
+						'text-decoration-line-through': item.completed,
+					}"
+				>
+					{{
+						(editing == item) & (item.completed == false)
+							? ""
+							: item.name
+					}}
+				</h2>
+				<v-text-field
+					v-if="editing == item && item.completed != true"
+					v-model="item.name"
+					hide-details
+					@keyup.escape="doneEdit"
+					@keyup.enter="doneEdit"
+				/>
+			</div>
 		</td>
 
-		<td style="width: 15%" class="pa-0 pl-2">
-			<v-checkbox
-				on-icon="mdi-check-circle-outline"
-				off-icon="mdi-checkbox-blank-circle-outline"
-				type="checkbox"
-				v-model="item.completed"
-				color="#1f9652"
-			>
-			</v-checkbox>
+		<td :class="isMobile ? 'is-mobile' : ''">
+			<div :class="!isMobile ? 'mobile-header' : ''">Hoàn thành</div>
+			<div class="d-flex justify-center">
+				<v-checkbox
+					on-icon="mdi-check-circle-outline"
+					off-icon="mdi-checkbox-blank-circle-outline"
+					type="checkbox"
+					v-model="item.completed"
+					color="#1f9652"
+					class="d-flex align-center justify-center"
+					:style="!isMobile ? { 'margin-right': '20px' } : ''"
+				>
+				</v-checkbox>
+			</div>
 		</td>
-		<td>
+		<td
+			:class="isMobile ? 'is-mobile' : ''"
+			style="text-align: center; vertical-align: middle"
+		>
+			<div :class="!isMobile ? 'mobile-header' : ''">Thời hạn</div>
 			<v-list-item-action style="" class="ma-0">
 				<v-dialog
 					ref="dialog"
@@ -52,21 +78,23 @@
 				>
 					<template v-slot:activator="{ on, attrs }">
 						<v-text-field
-							style="font-size: 0.8rem; width: 100px"
+							style="width: 105px"
+							placeholder="Thời hạn"
 							v-model="item.deadline"
 							readonly
 							v-bind="attrs"
 							v-on="on"
-							prepend-inner-icon="mdi-calendar"
 							hide-details
+							outlined
+							class="rounded-lg mr-4"
+							dense
 						></v-text-field>
 					</template>
+
 					<v-date-picker
 						color="green"
 						scrollable
 						year-icon="mdi-calendar-blank"
-						prev-icon="mdi-skip-previous"
-						next-icon="mdi-skip-next"
 						v-model="item.deadline"
 						:allowed-dates="disablePastDates"
 						><v-spacer></v-spacer>
@@ -85,13 +113,24 @@
 			</v-list-item-action>
 		</td>
 
-		<td style="width: 20px" class="ma-0 pa-0">
-			<v-icon @click="edit(item)" size="24" class="mr-2"
-				>mdi-pencil-outline</v-icon
-			>
-			<v-icon @click="Delete(item)" size="24"
-				>mdi-trash-can-outline</v-icon
-			>
+		<td :class="isMobile ? 'is-mobile' : ''">
+			<div :class="!isMobile ? 'mobile-header' : ''">Hành động</div>
+			<div class="d-flex align-center justify-center">
+				<v-icon
+					@click="edit(item)"
+					size="24"
+					class="white--text pa-1 rounded-lg ma-1"
+					style="background-color: orange"
+					>mdi-pencil-outline
+				</v-icon>
+				<v-icon
+					@click="Delete(item)"
+					size="24"
+					class="white--text pa-1 rounded-lg ma-1"
+					style="background-color: red"
+					>mdi-trash-can-outline
+				</v-icon>
+			</div>
 		</td>
 	</tr>
 </template>
@@ -103,6 +142,7 @@ export default {
 	props: {
 		item: Object,
 		priorities: Array,
+		isMobile: Boolean,
 	},
 	data() {
 		return {
@@ -140,3 +180,18 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.mobile-header {
+	display: none;
+}
+.is-mobile {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: none !important;
+	width: unset !important;
+}
+.priority {
+	width: 15%;
+}
+</style>

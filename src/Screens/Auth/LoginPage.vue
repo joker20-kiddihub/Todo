@@ -1,11 +1,12 @@
 <template>
-	<v-container class="fill-height justify-center">
+	<v-container class="fill-height justify-center pr-6 pl-6">
 		<v-card
-			class="justify-center row ma-0 elevation-10 d-flex"
-			height="570"
-			max-width="1200"
+			class="justify-center row ma-0 elevation-10 d-flex rounded-xl"
+			height="60vh"
+			max-width="1100"
+			style="overflow: hidden"
 		>
-			<v-col cols="6" md="4" sm="4" class="pa-0">
+			<v-col cols="12" md="4" sm="12" class="pa-0">
 				<v-card
 					class="text-center d-flex flex-column align-center justify-center"
 					height="100%"
@@ -27,42 +28,46 @@
 			<v-col
 				cols="12"
 				md="8"
-				sm="8"
-				class="d-flex flex-column align-center justify-center pa-0"
+				sm="12"
+				class="d-flex flex-column align-center justify-center pr-4 pl-4"
 			>
-				<v-card class="flex-column elevation-0" width="400">
-					<v-card-title class="justify-center">Login</v-card-title>
-					<form width="400" @submit.prevent="handleSubmit">
+				<v-card class="flex-column elevation-0" min-width="310">
+					<v-card-title class="justify-center pa-0"
+						>Đăng nhập</v-card-title
+					>
+					<form @submit.prevent="handleSubmit" class="pr-4 pl-4">
 						<div class="form-group">
-							<label for="username">Username</label>
 							<br />
+
 							<v-text-field
 								type="text"
 								v-model="username"
 								name="username"
 								class="form-control"
-								placeholder="Example..."
+								placeholder="Tên người dùng..."
 								:class="{
 									'is-invalid': submitted && !username,
 								}"
+								required
 							></v-text-field>
 							<div
 								v-show="submitted && !username"
-								class="invalid-feedback"
+								class="invalid-feedback mb-2"
+								style="color: red"
 							>
-								Username is required
+								Tên người dùng không được để trống
 							</div>
 						</div>
 						<div class="form-group">
 							<v-btn
-								class="mr-4 mt-4; white--text"
+								class="mr-4 mt-4; white--text rounded-lg"
 								color="#1F9652"
 								block
 								:disabled="status.loggingIn"
 								@click="handleSubmit"
 							>
 								<a href="http://localhost:8080/login"></a>
-								submit
+								Đăng nhập
 							</v-btn>
 							<img
 								v-show="status.loggingIn"

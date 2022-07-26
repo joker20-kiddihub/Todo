@@ -1,8 +1,17 @@
 <template>
 	<div>
 		<Header />
-		<v-container class="fluid justify-center pa-0 d-flex align-center">
+		<v-container class="fluid justify-center pa-2 d-flex align-center">
 			<v-card class="elevation-0" width="1000px">
+				<div class="mt-4 d-flex justify-end">
+					<router-link
+						to="/login"
+						style="color: #1f9652; text-decoration: none"
+					>
+						<v-icon color="green darken-2"> mdi-logout </v-icon>
+						Đăng xuất
+					</router-link>
+				</div>
 				<v-card
 					class="justify-center ma-0 elevation-0 d-flex"
 					height="500"
@@ -12,16 +21,16 @@
 					<v-card
 						class="ma-0 elevation-0"
 						color="transparent"
-						width="95%"
+						width="100%"
 					>
 						<AddTodo :priorities="priorities" />
 						<v-list
 							color="transparent"
-							height="340"
-							class="overflow-auto"
+							height="300"
+							class="overflow-auto pa-0"
 						>
 							<TodoList
-								:priorityHeaders="priorityHeaders"
+								:headers="headers"
 								:priorities="priorities"
 							/>
 						</v-list>
@@ -55,23 +64,33 @@ export default {
 			priority: this.$store.state.priorityId,
 			expanded: [],
 			singleExpand: false,
-			priorityHeaders: [
+
+			headers: [
 				{
 					text: "Ưu tiên",
 					value: "priority_id",
+					align: "center",
 				},
 
 				{
 					text: "Nội dung",
 					value: "name",
+					align: "start",
 				},
 				{
 					text: "Hoàn thành",
 					value: "completed",
+					align: "center",
 				},
 				{
 					text: "Thời hạn",
 					value: "deadline",
+					align: "center",
+				},
+				{
+					text: "Hành động",
+					sortable: false,
+					align: "center",
 				},
 			],
 

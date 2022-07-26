@@ -1,20 +1,22 @@
 <template>
-	<div class="justify-space-around text-center">
-		<b> YOU HAVE {{ allTasks }} TASK </b>
+	<div class="text-center">
+		<b> Bạn có {{ allTasks }} nhiệm vụ </b>
 		<br />
-		<span style="background: orange; border-radius: 8px">
-			Remaining task : {{ notDone }}
+		<span
+			style="background: orange; border-radius: 8px"
+			class="pl-4 pr-4 mr-4"
+		>
+			Đang chờ : {{ notDone }}
 		</span>
 
 		<span
 			style="background: #1f9625; border-radius: 8px"
-			class="white--text"
+			class="white--text pl-4 pr-4"
 		>
-			Done task : {{ Done }}
+			Hoàn thành : {{ Done }}
 		</span>
 
 		<br />
-		<router-link to="/login" class="text-center">Logout</router-link>
 	</div>
 </template>
 <script>

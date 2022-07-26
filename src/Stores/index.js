@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
 		newTodo: null,
 		editting: null,
 		deadlines: null,
-		priorityId: 0,
+		priorityId: 2,
 	},
 	mutations: mutations,
 	getters: getter,
