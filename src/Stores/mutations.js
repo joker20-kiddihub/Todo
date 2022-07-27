@@ -6,7 +6,7 @@ export default {
 			state.toDos.push({
 				id: Math.floor(Math.random() * 100),
 				name: payload.newToDo,
-				completed: false,
+				completed: 0,
 				user_id: account.state.user.id,
 				create_at: Date().toString(),
 				priority_id: payload.priorityId,

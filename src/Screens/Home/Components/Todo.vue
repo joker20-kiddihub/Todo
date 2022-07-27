@@ -15,13 +15,14 @@
 				></div>
 				<h4
 					:style="{ color: priorities[item.priority_id].color }"
-					class="ml-2"
+					class="pl-2"
 				>
 					{{ priorities[item.priority_id].name }}
 				</h4>
 			</div>
 		</td>
-		<td :class="isMobile ? 'is-mobile' : ''" style="width: 40%">
+
+		<td :class="isMobile ? 'is-mobile' : ''" style="width: 35%">
 			<div :class="!isMobile ? 'mobile-header' : ''">Nội dung</div>
 			<div style="max-width: 270px">
 				<h2
@@ -48,24 +49,42 @@
 			</div>
 		</td>
 
-		<td :class="isMobile ? 'is-mobile' : ''">
+		<td :class="isMobile ? 'is-mobile' : ''" class="mr-0 pr-0">
 			<div :class="!isMobile ? 'mobile-header' : ''">Hoàn thành</div>
-			<div class="d-flex justify-center">
-				<v-checkbox
-					on-icon="mdi-check-circle-outline"
-					off-icon="mdi-checkbox-blank-circle-outline"
-					type="checkbox"
+			<div class="d-flex justify-center ml-2" style="width: 160px">
+				<v-select
+					:items="complete"
 					v-model="item.completed"
-					color="#1f9652"
-					class="d-flex align-center justify-center"
-					:style="!isMobile ? { 'margin-right': '20px' } : ''"
+					item-text="name"
+					item-value="id"
+					style="font-size: 0.9rem"
+					hide-details
+					class="rounded-lg"
+					dense
+					flat
+					solo
+					background-color="body"
+					append-icon=""
 				>
-				</v-checkbox>
+					<template v-slot:selection="{ item }">
+						<span
+							class="d-flex justify-center white--text rounded-lg align-center font-weight-medium"
+							style="width: 120px; height: 20px"
+							:style="{
+								backgroundColor: item.color,
+							}"
+						>
+							{{ item.name }}
+						</span>
+						<v-icon>mdi-menu-down</v-icon>
+					</template>
+				</v-select>
 			</div>
 		</td>
+
 		<td
 			:class="isMobile ? 'is-mobile' : ''"
-			style="text-align: center; vertical-align: middle"
+			style="text-align: center; vertical-align: middle; height: 60px"
 		>
 			<div :class="!isMobile ? 'mobile-header' : ''">Thời hạn</div>
 			<v-list-item-action style="" class="ma-0">
@@ -118,14 +137,14 @@
 			<div class="d-flex align-center justify-center">
 				<v-icon
 					@click="edit(item)"
-					size="24"
-					class="white--text pa-1 rounded-lg ma-1"
+					size="22"
+					class="white--text pa-1 rounded-lg ma-1a"
 					style="background-color: orange"
 					>mdi-pencil-outline
 				</v-icon>
 				<v-icon
 					@click="Delete(item)"
-					size="24"
+					size="22"
 					class="white--text pa-1 rounded-lg ma-1"
 					style="background-color: red"
 					>mdi-trash-can-outline
@@ -136,6 +155,8 @@
 </template>
 
 <script>
+import colors from "../../../Config/colors";
+
 const LOCAL_STORAGE_KEY = "todo";
 
 export default {
@@ -150,6 +171,19 @@ export default {
 			editing: this.$store.state.editing,
 			deadline: this.$store.state.deadlines,
 			modal: false,
+
+			complete: [
+				{
+					id: 0,
+					name: "Đang thực hiện",
+					color: colors.orange,
+				},
+				{
+					id: 1,
+					name: "Hoàn thành",
+					color: colors.green,
+				},
+			],
 		};
 	},
 

@@ -3,7 +3,7 @@
 		<Header />
 		<v-container class="fluid justify-center pa-2 d-flex align-center">
 			<v-card class="elevation-0" width="1000px">
-				<div class="mt-4 d-flex justify-end">
+				<div class="mt-2 d-flex justify-end">
 					<router-link
 						to="/login"
 						style="color: #1f9652; text-decoration: none"
@@ -14,7 +14,7 @@
 				</div>
 				<v-card
 					class="justify-center ma-0 elevation-0 d-flex"
-					height="500"
+					height="100%"
 					color="white"
 					width="1200"
 				>
@@ -24,10 +24,11 @@
 						width="100%"
 					>
 						<AddTodo :priorities="priorities" />
+						<CountTodo />
 						<v-list
 							color="transparent"
-							height="300"
-							class="overflow-auto pa-0"
+							height="50vh"
+							class="overflow-auto pa-0 mt-4"
 						>
 							<TodoList
 								:headers="headers"
@@ -36,7 +37,6 @@
 						</v-list>
 					</v-card>
 				</v-card>
-				<Footer />
 			</v-card>
 		</v-container>
 	</div>
@@ -49,12 +49,12 @@ import { mapState, mapActions } from "vuex";
 import AddTodo from "./Components/AddTodo.vue";
 import TodoList from "./Components/TodoList.vue";
 import Header from "./Components/Header.vue";
-import Footer from "./Components/Footer.vue";
+import CountTodo from "./Components/CountTodo.vue";
 
 import colors from "../../Config/colors";
 
 export default {
-	components: { AddTodo, TodoList, Header, Footer },
+	components: { AddTodo, TodoList, Header, CountTodo },
 	data() {
 		return {
 			toDos: this.$store.state.toDos,
