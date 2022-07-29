@@ -11,6 +11,8 @@ Vue.use(VeeValidate);
 Vue.use(Vuex);
 Vue.config.productionTip = false;
 
+console.log(process.env.VUE_APP_LOCAL_STORAGE_KEY);
+
 import { configureFakeBackend } from "./Routes";
 configureFakeBackend();
 

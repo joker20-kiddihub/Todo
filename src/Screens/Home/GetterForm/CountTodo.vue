@@ -3,8 +3,9 @@
 		class="text-center align-center justify-center"
 		style="flex-wrap: wrap"
 	>
-		<div class="mx-3">Bạn có {{ allTasks }} nhiệm vụ</div>
-		<br />
+		<div class="mx-3" style="font-weight: bold">
+			Bạn có {{ allTasks }} nhiệm vụ
+		</div>
 		<div class="d-flex align-center justify-center">
 			<div
 				class="px-3 white--text rounded-lg"
@@ -33,6 +34,7 @@
 				Hủy bỏ: {{ cancel }}
 			</div>
 		</div>
+		<br />
 	</div>
 </template>
 <script>

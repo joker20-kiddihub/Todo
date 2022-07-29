@@ -34,8 +34,6 @@ import Completed from "./Item/Completed.vue";
 import Deadline from "./Item/Deadline.vue";
 import Action from "./Item/Action.vue";
 
-const LOCAL_STORAGE_KEY = "todo";
-
 export default {
 	components: { Priority, Title, Completed, Deadline, Action },
 	props: {

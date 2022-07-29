@@ -33,13 +33,13 @@
 </template>
 
 <script>
-const LOCAL_STORAGE_KEY = "todo";
 import { mapState, mapActions } from "vuex";
 
 import AddTodo from "./GetterForm/AddTodo.vue";
 import ListTodo from "./ListTodo/List.vue";
 import Header from "./Components/Header.vue";
 import CountTodo from "./GetterForm/CountTodo.vue";
+import { account } from "@/Stores/account.module";
 
 import colors from "../../Config/colors";
 export default {
@@ -83,7 +83,6 @@ export default {
 	methods: {
 		...mapActions("users", {
 			getAllUsers: "getAll",
-			deleteUser: "delete",
 		}),
 	},
 
@@ -92,7 +91,7 @@ export default {
 			deep: true,
 			handler(newValue) {
 				localStorage.setItem(
-					LOCAL_STORAGE_KEY,
+					account.state.user.localStorageKey,
 					JSON.stringify(newValue)
 				);
 			},

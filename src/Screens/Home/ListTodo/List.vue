@@ -25,18 +25,26 @@
 			</v-layout>
 		</v-list-item-group>
 		<div>
-			<v-btn text @click="removeAll"> clear </v-btn>
+			<v-btn
+				text
+				@click="removeAll"
+				style="background-color: #1f9652"
+				class="white--text"
+			>
+				clear
+			</v-btn>
 		</div>
 	</div>
 </template>
 
 <script>
+import { account } from "@/Stores/account.module";
 import Item from "./Item.vue";
 
-const LOCAL_STORAGE_KEY = "todo";
-
 export default {
-	components: { Item },
+	components: {
+		Item,
+	},
 
 	props: {
 		priorities: Array,
@@ -60,12 +68,12 @@ export default {
 					text: "Nội dung",
 					value: "name",
 					align: "start",
-					sortable: false,
 				},
 				{
 					text: "Trạng thái",
 					value: "completed",
 					align: "center",
+					sortable: false,
 				},
 				{
 					text: "Thời hạn",
@@ -105,9 +113,15 @@ export default {
 				this.pagination.descending = false;
 			}
 		},
-
 		removeAll() {
-			localStorage.removeItem(LOCAL_STORAGE_KEY);
+			if (this.toDos.length !== 0) {
+				const proceed = confirm("Bạn có chắc muốn xóa tất cả todo?");
+				if (proceed) {
+					this.toDos.splice(0, this.toDos.length);
+				} else {
+					console.log("Declined");
+				}
+			}
 		},
 	},
 };
@@ -117,6 +131,7 @@ export default {
 th {
 	font-size: 1.1rem !important;
 }
+
 @media only screen and (max-width: 400px) {
 	.mt-4 {
 		margin-top: 0px !important;

@@ -1,14 +1,14 @@
 let users = [
-	{ id: "5nwLmrzBoh", username: "Cơm sườn" },
-	{ id: "XhPFGzMpSw", username: "Cơm rang" },
-	{ id: "CQzHn1UCwt", username: "Bún chả" },
-	{ id: "jLZ0LCnyHH", username: "Bún riêu" },
-	{ id: "AVVdxKZ96d", username: "Bánh cuốn" },
-	{ id: "F3D6f7ekpE", username: "Phở bò" },
-	{ id: "nutY2MqLrx", username: "Phở gà" },
-	{ id: "bhAzwm6qKl", username: "Mỳ xào" },
-	{ id: "izn7TzevOf", username: "Mỳ cay" },
-	{ id: "OgzDTCTs0v", username: "Hủ tiếu" },
+	{ id: "5nwLmrzBoh", username: "Cơm sườn", localStorageKey: "comsuon" },
+	{ id: "XhPFGzMpSw", username: "Cơm rang", localStorageKey: "comrang" },
+	{ id: "CQzHn1UCwt", username: "Bún chả", localStorageKey: "buncha" },
+	{ id: "jLZ0LCnyHH", username: "Bún riêu", localStorageKey: "bunrieu" },
+	{ id: "AVVdxKZ96d", username: "Bánh cuốn", localStorageKey: "banhcuon" },
+	{ id: "F3D6f7ekpE", username: "Phở bò", localStorageKey: "phobo" },
+	{ id: "nutY2MqLrx", username: "Phở gà", localStorageKey: "phoga" },
+	{ id: "bhAzwm6qKl", username: "Mỳ xào", localStorageKey: "myxao" },
+	{ id: "izn7TzevOf", username: "Mỳ cay", localStorageKey: "mycay" },
+	{ id: "OgzDTCTs0v", username: "Hủ tiếu", localStorageKey: "hutieu" },
 ];
 
 export function configureFakeBackend() {
@@ -32,6 +32,7 @@ export function configureFakeBackend() {
 							id: user.id,
 							username: user.username,
 							token: "fake-jwt-token",
+							localStorageKey: user.localStorageKey
 						};
 						resolve({
 							ok: true,

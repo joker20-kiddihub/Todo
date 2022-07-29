@@ -8,9 +8,7 @@ import { account } from "./account.module";
 import { users } from "./users.module";
 
 Vue.use(Vuex);
-const LOCAL_STORAGE_KEY = "todo";
-// let firstTodo = [{"completed": false, "title":account.state.user.id}]
-// localStorage.setItem("todo", JSON.stringify(firstTodo))
+
 export const store = new Vuex.Store({
 	modules: {
 		alert,
@@ -18,7 +16,7 @@ export const store = new Vuex.Store({
 		users,
 	},
 	state: {
-		toDos: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
+		toDos: JSON.parse(localStorage.getItem(account.state.user.localStorageKey)) || [],
 		newTodo: null,
 		editting: null,
 		deadlines: null,

@@ -30,7 +30,6 @@ function login(username) {
 
 function logout() {
 	//localStorage.removeItem("user");
-	//localStorage.removeItem("todo");
 }
 
 

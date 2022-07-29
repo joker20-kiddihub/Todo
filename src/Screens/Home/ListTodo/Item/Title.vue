@@ -32,8 +32,6 @@
 </template>
 
 <script>
-const LOCAL_STORAGE_KEY = "todo";
-
 export default {
 	props: {
 		item: Object,

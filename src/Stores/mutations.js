@@ -4,7 +4,8 @@ export default {
 	addTask(state, payload) {
 		if (payload.newToDo.length) {
 			state.toDos.push({
-				id: Math.floor(Math.random() * 100),
+				local_storage_key: account.state.user.localStorageKey,
+				todo_id: Math.floor(Math.random() * 999),
 				name: payload.newToDo,
 				completed: 0,
 				user_id: account.state.user.id,
