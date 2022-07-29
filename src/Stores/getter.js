@@ -1,9 +1,12 @@
 export default {
-	notDone: (state) => {
-		return state.toDos.filter((m) => m.completed == false).length;
+	newTodo: (state) => {
+		return state.toDos.filter((m) => m.completed == 0).length;
 	},
-	Done: (state) => {
-		return state.toDos.filter((m) => m.completed == true).length;
+	done: (state) => {
+		return state.toDos.filter((m) => m.completed == 1).length;
+	},
+	cancel: (state) => {
+		return state.toDos.filter((m) => m.completed == 2).length;
 	},
 	allTasks: (state) => {
 		return state.toDos.length;

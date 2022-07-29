@@ -5,16 +5,17 @@
 			<v-layout v-resize="onResize" column class="mt-4">
 				<v-data-table
 					:headers="headers"
-					:items="toDos"
+					:items="reverseItems"
 					disable-pagination
 					class="elevation-1 body"
 					hide-default-footer
 					:hide-default-headers="isMobile"
+					fixed-header
 					:class="{ mobile: isMobile }"
+					height="50vh"
 				>
-					>
 					<template v-slot:item="{ item, index }">
-						<Todo
+						<Item
 							:item="item"
 							:priorities="priorities"
 							:isMobile="isMobile"
@@ -23,18 +24,22 @@
 				</v-data-table>
 			</v-layout>
 		</v-list-item-group>
+		<div>
+			<v-btn text @click="removeAll"> clear </v-btn>
+		</div>
 	</div>
 </template>
 
 <script>
-import Todo from "./Todo.vue";
+import Item from "./Item.vue";
+
+const LOCAL_STORAGE_KEY = "todo";
 
 export default {
-	components: { Todo },
+	components: { Item },
 
 	props: {
 		priorities: Array,
-		headers: Array,
 	},
 
 	data() {
@@ -43,7 +48,43 @@ export default {
 			selected: [],
 			search: "",
 			isMobile: false,
+
+			headers: [
+				{
+					text: "Ưu tiên",
+					value: "priority_id",
+					align: "center",
+				},
+
+				{
+					text: "Nội dung",
+					value: "name",
+					align: "start",
+					sortable: false,
+				},
+				{
+					text: "Trạng thái",
+					value: "completed",
+					align: "center",
+				},
+				{
+					text: "Thời hạn",
+					value: "deadline",
+					align: "center",
+				},
+				{
+					text: "Hành động",
+					sortable: false,
+					align: "center",
+				},
+			],
 		};
+	},
+
+	computed: {
+		reverseItems() {
+			return this.toDos.slice().reverse();
+		},
 	},
 
 	methods: {
@@ -64,6 +105,21 @@ export default {
 				this.pagination.descending = false;
 			}
 		},
+
+		removeAll() {
+			localStorage.removeItem(LOCAL_STORAGE_KEY);
+		},
 	},
 };
 </script>
+
+<style>
+th {
+	font-size: 1.1rem !important;
+}
+@media only screen and (max-width: 400px) {
+	.mt-4 {
+		margin-top: 0px !important;
+	}
+}
+</style>
